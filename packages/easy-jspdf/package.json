@@ -20,8 +20,9 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/node": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "@types/node": "catalog:"
+    "vite-plugin-dts": "catalog:"
   }
 }

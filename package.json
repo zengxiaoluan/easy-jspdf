@@ -1,5 +1,5 @@
 {
-  "name": "easy-jspdf-monorepo",
+  "name": "easy-jspdf",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,8 +7,8 @@
     "dev": "pnpm --filter easy-jspdf dev",
     "dev:playground": "pnpm --filter @easy-jspdf/playground dev",
     "build": "pnpm --filter easy-jspdf build",
-    "preview": "pnpm --filter easy-jspdf preview",
     "build:all": "pnpm -r build",
+    "preview": "pnpm --filter easy-jspdf preview",
     "dev:all": "pnpm -r dev",
     "install:all": "pnpm install",
     "publish:all": "pnpm --recursive publish",

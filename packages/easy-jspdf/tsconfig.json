@@ -4,9 +4,12 @@
     "noEmit": false,
     "allowImportingTsExtensions": false,
     "declaration": true,
-    "outDir": "./dist"
+    "declarationMap": true,
+    "declarationDir": "dist",
+    "outDir": "./dist",
   },
-  "include": [
+   "include": [
     "src"
-  ]
+  ],
+  "exclude": ["src/test/**/*", "src/main.ts", "**/*.test.ts"]
 }
