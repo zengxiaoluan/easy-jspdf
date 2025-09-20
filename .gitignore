@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 
+!playground/dist
+
 # Package build outputs
 packages/*/dist
 packages/*/build
