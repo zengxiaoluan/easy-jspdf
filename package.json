@@ -11,6 +11,7 @@
     "build:all": "pnpm -r build",
     "dev:all": "pnpm -r dev",
     "install:all": "pnpm install",
+    "publish:all": "pnpm --recursive publish",
     "catalog:install": "catalog install"
   },
   "devDependencies": {

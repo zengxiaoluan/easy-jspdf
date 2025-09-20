@@ -11,7 +11,6 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      'easy-jspdf': resolve(__dirname, '../easy-jspdf/src/lib/index.ts')
     }
   }
 })
