@@ -3,6 +3,9 @@
   "references": [
     {
       "path": "./packages/easy-jspdf"
+    },
+    {
+      "path": "./packages/playground"
     }
   ]
 }

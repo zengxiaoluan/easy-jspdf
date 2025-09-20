@@ -1,21 +1,15 @@
 {
-  "name": "easy-jspdf",
+  "name": "@easy-jspdf/playground",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "main": "./src/lib/index.ts",
-  "types": "./src/lib/index.ts",
-  "exports": {
-    ".": {
-      "import": "./src/lib/index.ts",
-      "types": "./src/lib/index.ts"
-    }
-  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build:lib": "tsc --project tsconfig.lib.json",
     "preview": "vite preview"
+  },
+  "dependencies": {
+    "easy-jspdf": "workspace:*"
   },
   "devDependencies": {
     "typescript": "catalog:",

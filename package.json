@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm --filter easy-jspdf dev",
+    "dev:playground": "pnpm --filter @easy-jspdf/playground dev",
     "build": "pnpm --filter easy-jspdf build",
     "preview": "pnpm --filter easy-jspdf preview",
     "build:all": "pnpm -r build",
     "dev:all": "pnpm -r dev",
-    "install:all": "pnpm install"
+    "install:all": "pnpm install",
+    "catalog:install": "catalog install"
   },
   "devDependencies": {
     "typescript": "~5.8.3"
