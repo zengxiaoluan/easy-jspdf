@@ -1,9 +1,11 @@
-import './style.css'
-import * as easy from 'easy-jspdf'
+import "./style.css";
+import { PDF } from "easy-jspdf";
 
-console.log(easy)
+let doc = new PDF();
 
-const blob = new Blob([easy.default], { type: "application/pdf" });
-const url = URL.createObjectURL(blob);
+doc.createPage();
+doc.line(0, 10, 100, 10);
 
-document.querySelector<HTMLEmbedElement>('#app')!.src = url
+let url = doc.toUrl();
+
+document.querySelector<HTMLEmbedElement>("#app")!.src = url;
