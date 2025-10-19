@@ -1,18 +1,35 @@
 export class PDF {
   private pages: string[][];
+  private pageDimensions: { width: number; height: number }[];
   private currentPageIndex: number;
 
   constructor() {
     this.pages = [["BT", "70 70 TD", "/F1 24 Tf", "(Hello World) Tj", "ET"]];
+    this.pageDimensions = [{ width: 300, height: 144 }];
     this.currentPageIndex = 0;
   }
 
   /**
-   * Creates a new page in the PDF document.
+   * create a new page with specified width and height
+   * @arg width width of the page
+   * @arg height height of the page
    */
-  createPage() {
+  createPage(width: number = 300, height: number = 144) {
     this.pages.push([]);
+    this.pageDimensions.push({ width, height });
     this.currentPageIndex = this.pages.length - 1;
+  }
+
+  /**
+   * Set the current page to draw on
+   * @param index index of the page
+   */
+  setCurrentPage(index: number) {
+    if (index >= 0 && index < this.pages.length) {
+      this.currentPageIndex = index;
+    } else {
+      throw new Error("Invalid page index");
+    }
   }
 
   line(x1: number, y1: number, x2: number, y2: number) {
@@ -37,15 +54,13 @@ endobj
 2 0 obj
 <<
 /Type /Pages
-/MediaBox [0 0 300 144]
 /Count ${pageCount}
 /Kids [${kids}]
 >>
 endobj`;
 
     this.pages.forEach((content, i) => {
-      const stream = content.join("\n");
-      const streamLength = stream.length;
+      const { width, height } = this.pageDimensions[i];
       const pageObj = 3 + i;
       const contentObj = 3 + pageCount + i;
 
@@ -54,6 +69,7 @@ ${pageObj} 0 obj
 <<
 /Type /Page
 /Parent 2 0 R
+/MediaBox [0 0 ${width} ${height}]
 /Resources <<
 /Font <<
 /F1 ${3 + pageCount * 2} 0 R
