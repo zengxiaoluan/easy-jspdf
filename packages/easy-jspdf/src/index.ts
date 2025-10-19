@@ -59,7 +59,7 @@ endobj
 >>
 endobj`;
 
-    this.pages.forEach((content, i) => {
+    this.pages.forEach((_content, i) => {
       const { width, height } = this.pageDimensions[i];
       const pageObj = 3 + i;
       const contentObj = 3 + pageCount + i;
