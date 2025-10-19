@@ -8,6 +8,10 @@ doc.createPage(1024, 768);
 doc.line(0, 10, 100, 10);
 doc.line(10, 10, 100, 100);
 
+doc.setCurrentPage(0);
+doc.line(0, 50, 200, 50);
+doc.line(50, 0, 50, 200);
+
 let url = doc.toUrl();
 
 document.querySelector<HTMLEmbedElement>("#app")!.src = url;
