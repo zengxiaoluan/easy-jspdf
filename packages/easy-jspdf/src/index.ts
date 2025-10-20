@@ -40,6 +40,10 @@ export class PDF {
     );
   }
 
+  comment(text: string) {
+    this.pages[this.currentPageIndex].push(`% ${text}`);
+  }
+
   private generatePDF(): string {
     const pageCount = this.pages.length;
     const kids = this.pages.map((_, i) => `${3 + i} 0 R`).join(" ");
@@ -125,6 +129,10 @@ startxref
 %%EOF`;
 
     return pdf;
+  }
+
+  getSourceCode() {
+    return this.generatePDF();
   }
 
   toBlob() {

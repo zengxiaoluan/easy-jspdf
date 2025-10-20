@@ -21,8 +21,10 @@ doc.line(50, 50, 50, 200);
 
 return doc;`;
 
+const savedCode = localStorage.getItem("playground-code") || defaultCode;
+
 const editor = monaco.editor.create(document.getElementById("editor")!, {
-  value: defaultCode,
+  value: savedCode,
   language: "typescript",
   theme: "vs-dark",
   automaticLayout: true
@@ -41,6 +43,8 @@ function updatePDF() {
 }
 
 editor.onDidChangeModelContent(() => {
+  const code = editor.getValue();
+  localStorage.setItem("playground-code", code);
   updatePDF();
 });
 
