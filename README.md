@@ -1,4 +1,4 @@
-# Easy jsPDF Monorepo
+# Easy jsPDF [![npm](https://img.shields.io/npm/v/easy-jspdf.svg)](https://www.npmjs.com/package/easy-jspdf) [![build status](https://github.com/zengxiaoluan/easy-jspdf/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/zengxiaoluan/easy-jspdf/actions/workflows/node.js.yml) [![Download](https://img.shields.io/npm/dm/easy-jspdf)](https://www.npmjs.com/package/easy-jspdf)
 
 This is a monorepo containing the Easy jsPDF project and related packages, managed with **Catalog** for centralized dependency management.
 
@@ -19,6 +19,7 @@ This is a monorepo containing the Easy jsPDF project and related packages, manag
 ## Getting Started
 
 Install dependencies for all packages:
+
 ```bash
 pnpm install
 ```
@@ -26,16 +27,19 @@ pnpm install
 ## Development
 
 Run the main EasyPDF library in development mode:
+
 ```bash
 pnpm dev
 ```
 
 Run the interactive playground:
+
 ```bash
 pnpm dev:playground
 ```
 
 Build all packages:
+
 ```bash
 pnpm build:all
 ```
