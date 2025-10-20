@@ -7,7 +7,10 @@
     <title>EasyPDF Playground</title>
   </head>
   <body>
-    <embed width="100%" height="1000px" id="app" src="" type="" />
+    <div style="display: flex; height: 100vh;">
+      <div id="editor" style="width: 50%; height: 100%;"></div>
+      <embed id="app" style="width: 50%; height: 100%;" src="" type="" />
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

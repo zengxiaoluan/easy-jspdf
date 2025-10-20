@@ -1,17 +1,47 @@
 import "./style.css";
 import { PDF } from "easy-jspdf";
+import * as monaco from "monaco-editor";
+import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
+import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker";
 
-let doc = new PDF();
+self.MonacoEnvironment = {
+  getWorker(_, label) {
+    if (label === "typescript" || label === "javascript") {
+      return new tsWorker();
+    }
+    return new editorWorker();
+  },
+};
 
-doc.createPage(1024, 768);
+const defaultCode = `const doc = new PDF();
 
-doc.line(0, 10, 100, 10);
-doc.line(10, 10, 100, 100);
+doc.createPage(612, 792); // US Letter size
+doc.line(50, 50, 200, 50);
+doc.line(50, 50, 50, 200);
 
-doc.setCurrentPage(0);
-doc.line(0, 50, 200, 50);
-doc.line(50, 0, 50, 200);
+return doc;`;
 
-let url = doc.toUrl();
+const editor = monaco.editor.create(document.getElementById("editor")!, {
+  value: defaultCode,
+  language: "typescript",
+  theme: "vs-dark",
+  automaticLayout: true
+});
 
-document.querySelector<HTMLEmbedElement>("#app")!.src = url;
+function updatePDF() {
+  try {
+    const code = editor.getValue();
+    const func = new Function("PDF", code);
+    const doc = func(PDF);
+    const url = doc.toUrl();
+    document.querySelector<HTMLEmbedElement>("#app")!.src = url;
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+  }
+}
+
+editor.onDidChangeModelContent(() => {
+  updatePDF();
+});
+
+updatePDF();

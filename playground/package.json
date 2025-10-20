@@ -9,7 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "easy-jspdf": "workspace:*"
+    "easy-jspdf": "workspace:*",
+    "monaco-editor": "^0.45.0"
   },
   "devDependencies": {
     "typescript": "catalog:",

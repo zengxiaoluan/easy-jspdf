@@ -15,6 +15,9 @@ catalogs:
     vite:
       specifier: ^7.1.5
       version: 7.1.6
+    vite-plugin-dts:
+      specifier: ^4.5.4
+      version: 4.5.4
 
 importers:
 
@@ -36,7 +39,7 @@ importers:
         specifier: 'catalog:'
         version: 7.1.6(@types/node@24.5.2)
       vite-plugin-dts:
-        specifier: ^4.5.4
+        specifier: 'catalog:'
         version: 4.5.4(@types/node@24.5.2)(rollup@4.52.0)(typescript@5.9.2)(vite@7.1.6(@types/node@24.5.2))
 
   playground:
@@ -44,6 +47,9 @@ importers:
       easy-jspdf:
         specifier: workspace:*
         version: link:../packages/easy-jspdf
+      monaco-editor:
+        specifier: ^0.45.0
+        version: 0.45.0
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -591,6 +597,9 @@ packages:
 
   mlly@1.8.0:
     resolution: {integrity: sha512-l8D9ODSRWLe2KHJSifWGwBqpTZXIXTeo8mlKjY+E2HAakaTeNpqAyBZ8GSqLzHgw4XmHmC8whvpjJNMbFZN7/g==}
+
+  monaco-editor@0.45.0:
+    resolution: {integrity: sha512-mjv1G1ZzfEE3k9HZN0dQ2olMdwIfaeAAjFiwNprLfYNRSz7ctv9XuCT7gPtBGrMUeV1/iZzYKj17Khu1hxoHOA==}
 
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
@@ -1224,6 +1233,8 @@ snapshots:
       pathe: 2.0.3
       pkg-types: 1.3.1
       ufo: 1.6.1
+
+  monaco-editor@0.45.0: {}
 
   ms@2.1.3: {}
 
