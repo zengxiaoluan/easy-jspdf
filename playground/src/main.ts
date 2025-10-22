@@ -30,6 +30,10 @@ const editor = monaco.editor.create(document.getElementById("editor")!, {
   automaticLayout: true
 });
 
+editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
+  // Prevent default Ctrl+S behavior
+});
+
 function updatePDF() {
   try {
     const code = editor.getValue();

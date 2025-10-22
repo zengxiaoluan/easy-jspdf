@@ -4,7 +4,7 @@ export class PDF {
   private currentPageIndex: number;
 
   constructor() {
-    this.pages = [["BT", "70 70 TD", "/F1 24 Tf", "(Hello World) Tj", "ET"]];
+    this.pages = [[]];
     this.pageDimensions = [{ width: 300, height: 144 }];
     this.currentPageIndex = 0;
   }
@@ -30,6 +30,16 @@ export class PDF {
     } else {
       throw new Error("Invalid page index");
     }
+  }
+
+  text(x: number, y: number, text: string) {
+    this.pages[this.currentPageIndex].push(
+      "BT",
+      `${x} ${y} TD`,
+      `/F1 24 Tf`,
+      `(${text}) Tj`,
+      "ET"
+    );
   }
 
   line(x1: number, y1: number, x2: number, y2: number) {
