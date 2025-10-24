@@ -32,14 +32,24 @@ export class PDF {
     }
   }
 
-  text(x: number, y: number, text: string) {
+  text(x: number, y: number, text: string, fontSize: number = 24, fontFamily: string = "Helvetica") {
+    const fontRef = this.getFontReference(fontFamily);
     this.pages[this.currentPageIndex].push(
       "BT",
       `${x} ${y} TD`,
-      `/F1 24 Tf`,
+      `/${fontRef} ${fontSize} Tf`,
       `(${text}) Tj`,
       "ET"
     );
+  }
+
+  private getFontReference(fontFamily: string): string {
+    const fontMap: { [key: string]: string } = {
+      "Helvetica": "F1",
+      "Times-Roman": "F2",
+      "Courier": "F3"
+    };
+    return fontMap[fontFamily] || "F1";
   }
 
   line(x1: number, y1: number, x2: number, y2: number) {
@@ -87,6 +97,8 @@ ${pageObj} 0 obj
 /Resources <<
 /Font <<
 /F1 ${3 + pageCount * 2} 0 R
+/F2 ${3 + pageCount * 2 + 1} 0 R
+/F3 ${3 + pageCount * 2 + 2} 0 R
 >>
 >>
 /Contents ${contentObj} 0 R
@@ -100,6 +112,20 @@ ${3 + pageCount * 2} 0 obj
 /Type /Font
 /Subtype /Type1
 /BaseFont /Helvetica
+>>
+endobj
+${3 + pageCount * 2 + 1} 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Times-Roman
+>>
+endobj
+${3 + pageCount * 2 + 2} 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Courier
 >>
 endobj`;
 
@@ -117,7 +143,7 @@ endstream
 endobj`;
     });
 
-    const totalObjects = 3 + pageCount * 2 + 1;
+    const totalObjects = 3 + pageCount * 2 + 3;
     pdf += `
 xref
 0 ${totalObjects}
