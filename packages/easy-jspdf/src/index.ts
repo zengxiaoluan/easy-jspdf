@@ -66,6 +66,12 @@ export class PDF {
     );
   }
 
+  /**
+   * The circle API is now implemented using Bézier curves to create a smooth circle approximation. The method takes three parameters
+   * @param x Center X coordinate
+   * @param y Center Y coordinate
+   * @param radius Circle radius
+   */
   circle(x: number, y: number, radius: number) {
     const k = 0.552284749831; // Bézier control point factor for circle approximation
     const r = radius;
@@ -81,12 +87,31 @@ export class PDF {
     );
   }
 
+  /**
+   * Adds the q operator to save the current graphics state
+   */
   saveState() {
     this.pages[this.currentPageIndex].push("q");
   }
 
+  /**
+   * Adds the Q operator to restore the previously saved graphics state
+   */
   restoreState() {
     this.pages[this.currentPageIndex].push("Q");
+  }
+
+  /**
+   * Added the matrix API that applies a transformation matrix using the PDF cm operator. The method takes six parameters representing the transformation matrix
+   * @param a Scaling factor in X direction
+   * @param b Skewing factors in Y direction
+   * @param c Skewing factors in X direction
+   * @param d Scaling factors in Y direction
+   * @param e Translation factors in X direction
+   * @param f Translation factors in Y direction
+   */
+  matrix(a: number, b: number, c: number, d: number, e: number, f: number) {
+    this.pages[this.currentPageIndex].push(`${a} ${b} ${c} ${d} ${e} ${f} cm`);
   }
 
   comment(text: string) {
