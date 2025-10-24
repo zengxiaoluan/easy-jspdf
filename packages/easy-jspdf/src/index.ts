@@ -32,7 +32,13 @@ export class PDF {
     }
   }
 
-  text(x: number, y: number, text: string, fontSize: number = 24, fontFamily: string = "Helvetica") {
+  text(
+    x: number,
+    y: number,
+    text: string,
+    fontSize: number = 24,
+    fontFamily: string = "Helvetica"
+  ) {
     const fontRef = this.getFontReference(fontFamily);
     this.pages[this.currentPageIndex].push(
       "BT",
@@ -45,9 +51,9 @@ export class PDF {
 
   private getFontReference(fontFamily: string): string {
     const fontMap: { [key: string]: string } = {
-      "Helvetica": "F1",
+      Helvetica: "F1",
       "Times-Roman": "F2",
-      "Courier": "F3"
+      Courier: "F3",
     };
     return fontMap[fontFamily] || "F1";
   }
@@ -57,6 +63,21 @@ export class PDF {
       `${x1} ${y1} m`,
       `${x2} ${y2} l`,
       "S"
+    );
+  }
+
+  circle(x: number, y: number, radius: number) {
+    const k = 0.552284749831; // Bézier control point factor for circle approximation
+    const r = radius;
+    const kr = k * r;
+
+    this.pages[this.currentPageIndex].push(
+      `${x} ${y + r} m`, // Move to top
+      `${x + kr} ${y + r} ${x + r} ${y + kr} ${x + r} ${y} c`, // Top-right curve
+      `${x + r} ${y - kr} ${x + kr} ${y - r} ${x} ${y - r} c`, // Bottom-right curve
+      `${x - kr} ${y - r} ${x - r} ${y - kr} ${x - r} ${y} c`, // Bottom-left curve
+      `${x - r} ${y + kr} ${x - kr} ${y + r} ${x} ${y + r} c`, // Top-left curve
+      "S" // Stroke
     );
   }
 
