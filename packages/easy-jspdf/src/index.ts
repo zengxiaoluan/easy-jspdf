@@ -81,6 +81,14 @@ export class PDF {
     );
   }
 
+  saveState() {
+    this.pages[this.currentPageIndex].push("q");
+  }
+
+  restoreState() {
+    this.pages[this.currentPageIndex].push("Q");
+  }
+
   comment(text: string) {
     this.pages[this.currentPageIndex].push(`% ${text}`);
   }
