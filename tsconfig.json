@@ -5,6 +5,9 @@
       "path": "./packages/easy-jspdf"
     },
     {
+      "path": "./packages/matrix"
+    },
+    {
       "path": "./packages/playground"
     }
   ]
