@@ -93,7 +93,17 @@ export class PDF {
    */
   setLineWidth(width: number) {
     this.pages[this.currentPageIndex].push(`${width} w`);
+    return this;
+  }
 
+  /**
+   * Adds the d operator to set the line dash pattern
+   * @param dashArray array defining the dash pattern
+   * @param dashPhase phase offset for the dash pattern
+   */
+  setLineDash(dashArray: number[], dashPhase: number = 0) {
+    const dashString = dashArray.join(" ");
+    this.pages[this.currentPageIndex].push(`[${dashString}] ${dashPhase} d`);
     return this;
   }
 
@@ -110,17 +120,19 @@ export class PDF {
     y: number,
     width: number,
     height: number,
-    strokeWidth?: number
+    strokeWidth?: number,
+    dashArray?: number[]
   ) {
     if (strokeWidth !== undefined) {
       this.setLineWidth(strokeWidth);
     }
-
+    if (dashArray !== undefined) {
+      this.setLineDash(dashArray);
+    }
     this.pages[this.currentPageIndex].push(
       `${x} ${y} ${width} ${height} re`,
       "S"
     );
-
     return this;
   }
 
