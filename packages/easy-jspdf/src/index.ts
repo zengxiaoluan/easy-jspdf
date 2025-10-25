@@ -88,6 +88,43 @@ export class PDF {
   }
 
   /**
+   * Adds the w operator to set the line width
+   * @param width width of the line
+   */
+  setLineWidth(width: number) {
+    this.pages[this.currentPageIndex].push(`${width} w`);
+
+    return this;
+  }
+
+  /**
+   * Adds the re operator to draw a rectangle
+   * @param x Bottom-left X coordinate
+   * @param y Bottom-left Y coordinate
+   * @param width Width of the rectangle
+   * @param height Height of the rectangle
+   * @param strokeWidth Stroke width of the rectangle
+   */
+  rect(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    strokeWidth?: number
+  ) {
+    if (strokeWidth !== undefined) {
+      this.setLineWidth(strokeWidth);
+    }
+
+    this.pages[this.currentPageIndex].push(
+      `${x} ${y} ${width} ${height} re`,
+      "S"
+    );
+
+    return this;
+  }
+
+  /**
    * Adds the q operator to save the current graphics state
    */
   saveState() {
