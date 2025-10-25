@@ -8,7 +8,7 @@
     "dev:playground": "pnpm --filter @easy-jspdf/playground dev",
     "build": "pnpm --filter easy-jspdf build",
     "build:all": "pnpm -r build",
-    "build:watch": "pnpm --filter easy-jspdf build:watch",
+    "build:watch": "pnpm -r build:watch",
     "preview": "pnpm --filter easy-jspdf preview",
     "dev:all": "pnpm -r dev",
     "install:all": "pnpm install",

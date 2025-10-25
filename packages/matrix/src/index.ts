@@ -1,12 +1,26 @@
 export class Matrix {
+  public a: number;
+  public b: number;
+  public c: number;
+  public d: number;
+  public e: number;
+  public f: number;
+
   constructor(
-    public a: number = 1,
-    public b: number = 0,
-    public c: number = 0,
-    public d: number = 1,
-    public e: number = 0,
-    public f: number = 0
-  ) {}
+    a: number = 1,
+    b: number = 0,
+    c: number = 0,
+    d: number = 1,
+    e: number = 0,
+    f: number = 0
+  ) {
+    this.a = a;
+    this.b = b;
+    this.c = c;
+    this.d = d;
+    this.e = e;
+    this.f = f;
+  }
 
   multiply(other: Matrix): Matrix {
     return new Matrix(
