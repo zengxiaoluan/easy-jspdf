@@ -1,3 +1,5 @@
+import { getColorValues } from "./utils";
+
 export class PDF {
   private pages: string[][];
   private pageDimensions: { width: number; height: number }[];
@@ -108,6 +110,32 @@ export class PDF {
   }
 
   /**
+   * The color affects all subsequent stroke operations (lines, rectangles, circles) until changed again.
+   * Uses RG operator with normalized values (0-1 range)
+   * @param r
+   * @param g
+   * @param b
+   * @returns
+   */
+  setStrokeColor(r: number | string, g?: number, b?: number) {
+    let red: string, green: string, blue: string;
+
+    if (typeof r === "string") {
+      const [rVal, gVal, bVal] = getColorValues(r);
+      red = rVal;
+      green = gVal;
+      blue = bVal;
+    } else {
+      red = (r / 255).toFixed(3);
+      green = ((g || 0) / 255).toFixed(3);
+      blue = ((b || 0) / 255).toFixed(3);
+    }
+
+    this.pages[this.currentPageIndex].push(`${red} ${green} ${blue} RG`);
+    return this;
+  }
+
+  /**
    * Adds the re operator to draw a rectangle
    * @param x Bottom-left X coordinate
    * @param y Bottom-left Y coordinate
@@ -171,7 +199,7 @@ export class PDF {
     const pageCount = this.pages.length;
     const kids = this.pages.map((_, i) => `${3 + i} 0 R`).join(" ");
 
-    let pdf = `%PDF-1.1
+    let pdf = `%PDF-1.7
 1 0 obj
 <<
 /Type /Catalog
