@@ -11,6 +11,7 @@
     "build:watch": "pnpm -r build:watch",
     "preview": "pnpm --filter easy-jspdf preview",
     "dev:all": "pnpm -r dev",
+    "test:all": "pnpm -r test",
     "install:all": "pnpm install",
     "publish:all": "pnpm --recursive publish",
     "catalog:install": "catalog install"

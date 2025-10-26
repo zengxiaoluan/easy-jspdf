@@ -18,12 +18,15 @@
     "build": "tsc && vite build",
     "build:watch": "tsc && vite build --watch",
     "build:lib": "tsc --project tsconfig.lib.json",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "devDependencies": {
     "@types/node": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "vite-plugin-dts": "catalog:"
+    "vite-plugin-dts": "catalog:",
+    "jsdom": "catalog:",
+    "vitest": "catalog:"
   }
 }
