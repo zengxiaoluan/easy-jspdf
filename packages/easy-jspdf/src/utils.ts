@@ -1,5 +1,6 @@
 /**
  * The function supports all standard CSS color keywords from aliceblue to yellowgreen, providing comprehensive color naming support for the PDF library.
+ * https://www.w3.org/wiki/CSS/Properties/color/keywords
  * @param color
  * @returns
  */
