@@ -34,6 +34,10 @@ importers:
         version: 5.8.3
 
   packages/easy-jspdf:
+    dependencies:
+      '@easy-jspdf/matrix':
+        specifier: workspace:*
+        version: link:../matrix
     devDependencies:
       '@types/node':
         specifier: 'catalog:'

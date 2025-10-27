@@ -1,5 +1,5 @@
 import "./style.css";
-import { PDF } from "easy-jspdf";
+import { PDF, Matrix } from "easy-jspdf";
 import * as monaco from "monaco-editor";
 import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
 import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker";
@@ -27,7 +27,7 @@ const editor = monaco.editor.create(document.getElementById("editor")!, {
   value: savedCode,
   language: "typescript",
   theme: "vs-dark",
-  automaticLayout: true
+  automaticLayout: true,
 });
 
 editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
@@ -37,8 +37,8 @@ editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
 function updatePDF() {
   try {
     const code = editor.getValue();
-    const func = new Function("PDF", code);
-    const doc = func(PDF);
+    const func = new Function("PDF", "Matrix", code);
+    const doc = func(PDF, Matrix);
     const url = doc.toUrl();
     document.querySelector<HTMLEmbedElement>("#app")!.src = url;
   } catch (error) {

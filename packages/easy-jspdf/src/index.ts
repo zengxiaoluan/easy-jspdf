@@ -1,4 +1,7 @@
 import { getColorValues } from "./utils";
+import { Matrix } from "@easy-jspdf/matrix";
+
+export { Matrix };
 
 export class PDF {
   private pages: string[][];
@@ -42,13 +45,22 @@ export class PDF {
     fontFamily: string = "Helvetica"
   ) {
     const fontRef = this.getFontReference(fontFamily);
+    const encodedText = this.encodeText(text);
     this.pages[this.currentPageIndex].push(
       "BT",
       `${x} ${y} TD`,
       `/${fontRef} ${fontSize} Tf`,
-      `(${text}) Tj`,
+      encodedText,
       "ET"
     );
+  }
+
+  private encodeText(text: string): string {
+    const utf8Bytes = new TextEncoder().encode(text);
+    const hexString = Array.from(utf8Bytes)
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("");
+    return `<${hexString}> Tj`;
   }
 
   private getFontReference(fontFamily: string): string {
