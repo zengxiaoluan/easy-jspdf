@@ -1,10 +1,8 @@
-export class Primitive {
-  protected pages: string[][];
-  protected currentPageIndex: number;
+import { StrokeAndFill } from "./stroke-and-fill";
 
+export class Primitive extends StrokeAndFill {
   constructor() {
-    this.pages = [[]];
-    this.currentPageIndex = 0;
+    super();
   }
 
   ellipse(x: number, y: number, rx: number, ry: number, fill: boolean = false) {
@@ -20,6 +18,8 @@ export class Primitive {
       `${x - rx} ${y + ryk} ${x - rxk} ${y + ry} ${x} ${y + ry} c`, // Top-left curve
       fill ? "f" : "S" // Fill or Stroke
     );
+
+    return this;
   }
 
   /**
