@@ -86,7 +86,7 @@ export class PDF {
    * @param y Center Y coordinate
    * @param radius Circle radius
    */
-  circle(x: number, y: number, radius: number) {
+  circle(x: number, y: number, radius: number, fill: boolean = false) {
     const k = 0.552284749831; // Bézier control point factor for circle approximation
     const r = radius;
     const kr = k * r;
@@ -97,7 +97,7 @@ export class PDF {
       `${x + r} ${y - kr} ${x + kr} ${y - r} ${x} ${y - r} c`, // Bottom-right curve
       `${x - kr} ${y - r} ${x - r} ${y - kr} ${x - r} ${y} c`, // Bottom-left curve
       `${x - r} ${y + kr} ${x - kr} ${y + r} ${x} ${y + r} c`, // Top-left curve
-      "S" // Stroke
+      fill ? "f" : "S" // Fill or Stroke
     );
   }
 
@@ -144,6 +144,24 @@ export class PDF {
     }
 
     this.pages[this.currentPageIndex].push(`${red} ${green} ${blue} RG`);
+    return this;
+  }
+
+  setFillColor(r: number | string, g?: number, b?: number) {
+    let red: string, green: string, blue: string;
+
+    if (typeof r === "string") {
+      const [rVal, gVal, bVal] = getColorValues(r);
+      red = rVal;
+      green = gVal;
+      blue = bVal;
+    } else {
+      red = (r / 255).toFixed(3);
+      green = ((g || 0) / 255).toFixed(3);
+      blue = ((b || 0) / 255).toFixed(3);
+    }
+
+    this.pages[this.currentPageIndex].push(`${red} ${green} ${blue} rg`);
     return this;
   }
 
