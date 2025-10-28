@@ -1,14 +1,15 @@
 import { getColorValues } from "./utils";
 import { Matrix } from "@easy-jspdf/matrix";
+import { Primitive } from "./primitive";
 
 export { Matrix };
 
-export class PDF {
-  private pages: string[][];
+export class PDF extends Primitive {
   private pageDimensions: { width: number; height: number }[];
-  private currentPageIndex: number;
 
   constructor() {
+    super();
+
     this.pages = [[]];
     this.pageDimensions = [{ width: 300, height: 144 }];
     this.currentPageIndex = 0;
@@ -35,70 +36,6 @@ export class PDF {
     } else {
       throw new Error("Invalid page index");
     }
-  }
-
-  text(
-    x: number,
-    y: number,
-    text: string,
-    fontSize: number = 24,
-    fontFamily: string = "Helvetica"
-  ) {
-    const fontRef = this.getFontReference(fontFamily);
-    const encodedText = this.encodeText(text);
-    this.pages[this.currentPageIndex].push(
-      "BT",
-      `${x} ${y} TD`,
-      `/${fontRef} ${fontSize} Tf`,
-      encodedText,
-      "ET"
-    );
-  }
-
-  private encodeText(text: string): string {
-    const utf8Bytes = new TextEncoder().encode(text);
-    const hexString = Array.from(utf8Bytes)
-      .map((byte) => byte.toString(16).padStart(2, "0"))
-      .join("");
-    return `<${hexString}> Tj`;
-  }
-
-  private getFontReference(fontFamily: string): string {
-    const fontMap: { [key: string]: string } = {
-      Helvetica: "F1",
-      "Times-Roman": "F2",
-      Courier: "F3",
-    };
-    return fontMap[fontFamily] || "F1";
-  }
-
-  line(x1: number, y1: number, x2: number, y2: number) {
-    this.pages[this.currentPageIndex].push(
-      `${x1} ${y1} m`,
-      `${x2} ${y2} l`,
-      "S"
-    );
-  }
-
-  /**
-   * The circle API is now implemented using Bézier curves to create a smooth circle approximation. The method takes three parameters
-   * @param x Center X coordinate
-   * @param y Center Y coordinate
-   * @param radius Circle radius
-   */
-  circle(x: number, y: number, radius: number, fill: boolean = false) {
-    const k = 0.552284749831; // Bézier control point factor for circle approximation
-    const r = radius;
-    const kr = k * r;
-
-    this.pages[this.currentPageIndex].push(
-      `${x} ${y + r} m`, // Move to top
-      `${x + kr} ${y + r} ${x + r} ${y + kr} ${x + r} ${y} c`, // Top-right curve
-      `${x + r} ${y - kr} ${x + kr} ${y - r} ${x} ${y - r} c`, // Bottom-right curve
-      `${x - kr} ${y - r} ${x - r} ${y - kr} ${x - r} ${y} c`, // Bottom-left curve
-      `${x - r} ${y + kr} ${x - kr} ${y + r} ${x} ${y + r} c`, // Top-left curve
-      fill ? "f" : "S" // Fill or Stroke
-    );
   }
 
   /**
@@ -166,35 +103,6 @@ export class PDF {
   }
 
   /**
-   * Adds the re operator to draw a rectangle
-   * @param x Bottom-left X coordinate
-   * @param y Bottom-left Y coordinate
-   * @param width Width of the rectangle
-   * @param height Height of the rectangle
-   * @param strokeWidth Stroke width of the rectangle
-   */
-  rect(
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-    strokeWidth?: number,
-    dashArray?: number[]
-  ) {
-    if (strokeWidth !== undefined) {
-      this.setLineWidth(strokeWidth);
-    }
-    if (dashArray !== undefined) {
-      this.setLineDash(dashArray);
-    }
-    this.pages[this.currentPageIndex].push(
-      `${x} ${y} ${width} ${height} re`,
-      "S"
-    );
-    return this;
-  }
-
-  /**
    * Adds the q operator to save the current graphics state
    */
   saveState() {
@@ -219,10 +127,6 @@ export class PDF {
    */
   matrix(a: number, b: number, c: number, d: number, e: number, f: number) {
     this.pages[this.currentPageIndex].push(`${a} ${b} ${c} ${d} ${e} ${f} cm`);
-  }
-
-  comment(text: string) {
-    this.pages[this.currentPageIndex].push(`% ${text}`);
   }
 
   private generatePDF(): string {
