@@ -8,6 +8,9 @@
       "path": "./packages/matrix"
     },
     {
+      "path": "./packages/vite-plugin-deps-tree"
+    },
+    {
       "path": "./packages/playground"
     }
   ]

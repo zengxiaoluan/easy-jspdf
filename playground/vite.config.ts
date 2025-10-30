@@ -1,17 +1,17 @@
-import { defineConfig } from 'vite'
-import { resolve } from 'path'
+import { defineConfig } from "vite";
+import { depsTree } from "@easy-jspdf/vite-plugin-deps-tree";
 
 export default defineConfig({
-  base:'./',
-  root: '.',
+  plugins: [depsTree()],
+  base: "./",
+  root: ".",
   build: {
-    outDir: 'dist'
+    outDir: "dist",
   },
   server: {
-    port: 3001
+    port: 3001,
   },
   resolve: {
-    alias: {
-    }
-  }
-})
+    alias: {},
+  },
+});

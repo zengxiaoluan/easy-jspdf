@@ -1,0 +1,20 @@
+{
+  "name": "@easy-jspdf/vite-plugin-deps-tree",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "vite build",
+    "build:watch": "tsc && vite build --watch",
+    "dev": "vite build --watch"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-dts": "catalog:"
+  },
+  "peerDependencies": {
+    "vite": "^6.0.0"
+  }
+}

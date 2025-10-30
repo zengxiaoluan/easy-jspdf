@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm --filter easy-jspdf dev",
+    "dev:plugin": "pnpm --filter @easy-jspdf/vite-plugin-deps-tree dev",
     "dev:playground": "pnpm --filter @easy-jspdf/playground dev",
     "build": "pnpm --filter easy-jspdf build",
+    "build:plugin": "pnpm --filter @easy-jspdf/vite-plugin-deps-tree build",
     "build:all": "pnpm -r build",
     "build:watch": "pnpm -r build:watch",
     "preview": "pnpm --filter easy-jspdf preview",

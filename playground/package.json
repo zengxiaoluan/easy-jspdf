@@ -13,6 +13,7 @@
     "monaco-editor": "^0.45.0"
   },
   "devDependencies": {
+    "@easy-jspdf/vite-plugin-deps-tree": "workspace:*",
     "typescript": "catalog:",
     "vite": "catalog:",
     "@types/node": "catalog:"
