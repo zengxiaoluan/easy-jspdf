@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import { depsTree } from "@easy-jspdf/vite-plugin-deps-tree";
 
 export default defineConfig({
-  plugins: [depsTree()],
+  plugins: [depsTree({ server: true })],
   base: "./",
   root: ".",
   build: {
