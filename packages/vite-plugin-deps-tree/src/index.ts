@@ -36,6 +36,4 @@ export function depsTree(options: DepsTreeOptions = {}): Plugin {
   };
 }
 
-
-
 export default depsTree;

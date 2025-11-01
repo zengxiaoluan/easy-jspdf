@@ -25,7 +25,16 @@ export class PDF extends Primitive {
     this.pageDimensions.push({ width, height });
     this.currentPageIndex = this.pages.length - 1;
 
-    return this;
+    let self = this;
+    let index = this.currentPageIndex;
+
+    return new Proxy(this, {
+      get: (target, prop, receiver) => {
+        self.setCurrentPage(index);
+
+        return Reflect.get(target, prop, receiver);
+      },
+    });
   }
 
   /**
@@ -57,32 +66,6 @@ export class PDF extends Primitive {
   setLineDash(dashArray: number[], dashPhase: number = 0) {
     const dashString = dashArray.join(" ");
     this.pages[this.currentPageIndex].push(`[${dashString}] ${dashPhase} d`);
-    return this;
-  }
-
-  /**
-   * The color affects all subsequent stroke operations (lines, rectangles, circles) until changed again.
-   * Uses RG operator with normalized values (0-1 range)
-   * @param r
-   * @param g
-   * @param b
-   * @returns
-   */
-  setStrokeColor(r: number | string, g?: number, b?: number) {
-    let red: string, green: string, blue: string;
-
-    if (typeof r === "string") {
-      const [rVal, gVal, bVal] = getColorValues(r);
-      red = rVal;
-      green = gVal;
-      blue = bVal;
-    } else {
-      red = (r / 255).toFixed(3);
-      green = ((g || 0) / 255).toFixed(3);
-      blue = ((b || 0) / 255).toFixed(3);
-    }
-
-    this.pages[this.currentPageIndex].push(`${red} ${green} ${blue} RG`);
     return this;
   }
 
