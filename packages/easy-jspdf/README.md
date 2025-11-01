@@ -1,13 +1,9 @@
-# Easy jsPDF [![npm](https://img.shields.io/npm/v/easy-jspdf.svg)](https://www.npmjs.com/package/easy-jspdf) [![build status](https://github.com/zengxiaoluan/easy-jspdf/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/zengxiaoluan/easy-jspdf/actions/workflows/node.js.yml) [![Download](https://img.shields.io/npm/dm/easy-jspdf)](https://www.npmjs.com/package/easy-jspdf)
-
-A lightweight, zero-dependency JavaScript library for generating PDF documents in the browser. Easy jsPDF provides a simple API for creating multi-page PDFs with drawing operations, perfect for client-side PDF generation without external dependencies.
-
 ## Installation
 
 ```bash
-npm install easy-jspdf
+npm install easy-jspdf -S
 # or
-pnpm add easy-jspdf
+pnpm add easy-jspdf -S
 # or
 yarn add easy-jspdf
 ```
@@ -100,10 +96,10 @@ doc.rect(200, 50, 100, 75, 2, [5, 3]); // Dashed rectangle
 Adds text to the PDF with Unicode support.
 
 ```typescript
-doc.text(50, 50, 'Hello World');
-doc.text(50, 100, 'Large text', 36);
-doc.text(50, 150, 'Times font', 18, 'Times-Roman');
-doc.text(50, 200, '你好世界'); // Unicode support
+doc.text(50, 50, "Hello World");
+doc.text(50, 100, "Large text", 36);
+doc.text(50, 150, "Times font", 18, "Times-Roman");
+doc.text(50, 200, "你好世界"); // Unicode support
 ```
 
 **Supported fonts**: Helvetica (default), Times-Roman, Courier
@@ -134,8 +130,8 @@ Sets stroke color using RGB values or color names.
 
 ```typescript
 doc.setStrokeColor(255, 0, 0); // Red RGB
-doc.setStrokeColor('blue'); // Color name
-doc.setStrokeColor('cornflowerblue'); // CSS color names
+doc.setStrokeColor("blue"); // Color name
+doc.setStrokeColor("cornflowerblue"); // CSS color names
 ```
 
 #### `setFillColor(r: number | string, g?: number, b?: number)`
@@ -144,7 +140,7 @@ Sets fill color for filled shapes.
 
 ```typescript
 doc.setFillColor(0, 255, 0); // Green fill
-doc.setFillColor('red'); // Red fill
+doc.setFillColor("red"); // Red fill
 ```
 
 #### `saveState()` / `restoreState()`
@@ -169,7 +165,7 @@ doc.matrix(2, 0, 0, 2, 0, 0); // Scale 2x
 ### Matrix Helper
 
 ```typescript
-import { Matrix } from 'easy-jspdf';
+import { Matrix } from "easy-jspdf";
 
 const m = new Matrix()
   .translate(50, 100)
@@ -229,9 +225,9 @@ doc.createPage(842, 1191);
 Supports all CSS color names:
 
 ```typescript
-doc.setStrokeColor('red');
-doc.setStrokeColor('cornflowerblue');
-doc.setStrokeColor('mediumseagreen');
+doc.setStrokeColor("red");
+doc.setStrokeColor("cornflowerblue");
+doc.setStrokeColor("mediumseagreen");
 // ... and 144 more CSS colors
 ```
 
@@ -240,12 +236,13 @@ doc.setStrokeColor('mediumseagreen');
 Most methods support chaining:
 
 ```typescript
-doc.createPage(612, 792)
-   .setStrokeColor('blue')
-   .setLineWidth(3)
-   .rect(50, 50, 100, 100)
-   .setFillColor('red')
-   .circle(200, 200, 50, true);
+doc
+  .createPage(612, 792)
+  .setStrokeColor("blue")
+  .setLineWidth(3)
+  .rect(50, 50, 100, 100)
+  .setFillColor("red")
+  .circle(200, 200, 50, true);
 ```
 
 ## Features

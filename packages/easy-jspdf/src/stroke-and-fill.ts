@@ -2,7 +2,7 @@ import { PathPaintingOperators } from "./types";
 import { getColorValues } from "./utils";
 
 export class StrokeAndFill {
-  protected pages: string[][] = [[]];
+  protected pages: string[][] = [];
   protected currentPageIndex: number = 0;
   private currentStrokeColor: Record<number, any> = {};
 

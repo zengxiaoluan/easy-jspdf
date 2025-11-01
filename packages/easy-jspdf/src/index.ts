@@ -5,14 +5,10 @@ import { Primitive } from "./primitive";
 export { Matrix };
 
 export class PDF extends Primitive {
-  private pageDimensions: { width: number; height: number }[];
+  private pageDimensions: { width: number; height: number }[] = [];
 
   constructor() {
     super();
-
-    this.pages = [[]];
-    this.pageDimensions = [{ width: 300, height: 144 }];
-    this.currentPageIndex = 0;
   }
 
   /**
@@ -54,6 +50,10 @@ export class PDF extends Primitive {
    * @param width width of the line
    */
   setLineWidth(width: number) {
+    if (!this.pages.length) {
+      throw new Error("No pages available. Create a page first.");
+    }
+
     this.pages[this.currentPageIndex].push(`${width} w`);
     return this;
   }
