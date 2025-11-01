@@ -24,6 +24,8 @@ export class PDF extends Primitive {
     this.pages.push([]);
     this.pageDimensions.push({ width, height });
     this.currentPageIndex = this.pages.length - 1;
+
+    return this;
   }
 
   /**
