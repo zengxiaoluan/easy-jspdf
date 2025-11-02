@@ -5,6 +5,37 @@ export class Primitive extends StrokeAndFill {
     super();
   }
 
+  /**
+   * The bezier method creates smooth curves perfect for complex shapes, logos, and artistic elements in your PDF documents.
+   * Start point (x1,y1), two control points (x2,y2), (x3,y3), and end point (x4,y4)
+   * @param x1
+   * @param y1
+   * @param x2
+   * @param y2
+   * @param x3
+   * @param y3
+   * @param x4
+   * @param y4
+   * @returns
+   */
+  bezier(
+    x1: number,
+    y1: number,
+    x2: number,
+    y2: number,
+    x3: number,
+    y3: number,
+    x4: number,
+    y4: number
+  ) {
+    this.pages[this.currentPageIndex].push(
+      `${x1} ${y1} m`, // Move to start point
+      `${x2} ${y2} ${x3} ${y3} ${x4} ${y4} c`, // Cubic Bézier curve
+      "S" // Stroke
+    );
+    return this;
+  }
+
   ellipse(x: number, y: number, rx: number, ry: number, fill: boolean = false) {
     const k = 0.552284749831; // Bézier control point factor for ellipse approximation
     const rxk = k * rx;
