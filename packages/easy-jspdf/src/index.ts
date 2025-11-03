@@ -6,6 +6,7 @@ export { Matrix };
 
 export class PDF extends Primitive {
   private pageDimensions: { width: number; height: number }[] = [];
+  private author: string = "";
 
   constructor() {
     super();
@@ -114,6 +115,11 @@ export class PDF extends Primitive {
     this.pages[this.currentPageIndex].push(`${a} ${b} ${c} ${d} ${e} ${f} cm`);
   }
 
+  setAuthor(author: string) {
+    this.author = author;
+    return this;
+  }
+
   private generatePDF(): string {
     const pageCount = this.pages.length;
     const kids = this.pages.map((_, i) => `${3 + i} 0 R`).join(" ");
@@ -193,7 +199,21 @@ endstream
 endobj`;
     });
 
-    const totalObjects = 3 + pageCount * 2 + 3;
+    let totalObjects = 3 + pageCount * 2 + 3;
+
+    if (this.author) {
+      const infoObj = totalObjects;
+      totalObjects++;
+      pdf += `
+${infoObj} 0 obj
+<<
+/Author (${this.author})
+/Title (klk)
+/Producer (Easy jsPDF)
+>>
+endobj`;
+    }
+
     pdf += `
 xref
 0 ${totalObjects}
@@ -208,6 +228,7 @@ xref
 trailer
 <<
 /Root 1 0 R
+/Info ${this.author ? totalObjects - 1 : ""} 0 R
 /Size ${totalObjects}
 >>
 startxref
