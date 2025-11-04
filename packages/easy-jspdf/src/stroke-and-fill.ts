@@ -1,12 +1,15 @@
 import { PathPaintingOperators } from "./types";
 import { getColorValues } from "./utils";
+import { Metadata } from "./meta-data";
 
-export class StrokeAndFill {
+export class StrokeAndFill extends Metadata {
   protected pages: string[][] = [];
   protected currentPageIndex: number = 0;
   private currentStrokeColor: Record<number, any> = {};
 
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   fillMe() {
     let currentPage = this.pages[this.currentPageIndex];
