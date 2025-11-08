@@ -4,6 +4,7 @@ export class Metadata {
   protected author: string = "";
   protected title: string = "";
   protected subject: string = "";
+  protected keywords: string = "";
 
   setAuthor(author: string) {
     this.author = author;
@@ -17,6 +18,11 @@ export class Metadata {
 
   setSubject(subject: string) {
     this.subject = subject;
+    return this;
+  }
+
+  setKeywords(keywords: string) {
+    this.keywords = keywords;
     return this;
   }
 }

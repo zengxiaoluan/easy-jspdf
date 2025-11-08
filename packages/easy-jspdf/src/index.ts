@@ -203,6 +203,9 @@ ${infoObj} 0 obj
 /Author (${this.author})
 /Title (${this.title})
 /Subject (${this.subject})
+/CreationDate (D:${new Date().toISOString().replace(/[-:]/g, "")})
+/ModDate (D:${new Date().toISOString().replace(/[-:]/g, "")})
+/Keywords (${this.keywords})
 /Creator (Easy jsPDF)
 /Producer (Easy jsPDF)
 >>
