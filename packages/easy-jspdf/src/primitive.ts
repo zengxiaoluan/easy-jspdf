@@ -103,6 +103,10 @@ export class Primitive extends StrokeAndFill {
     this.pages[this.currentPageIndex].push(`% ${text}`);
   }
 
+  image() {
+    console.error("Not implemented yet");
+  }
+
   text(
     x: number,
     y: number,
